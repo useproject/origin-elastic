@@ -8,7 +8,7 @@ import (
 	"path/filepath"
 	"time"
 
-	"github.com/ErwinYy/origin-elastic/gosigar/sys/linux"
+	"github.com/useproject/origin-elastic/gosigar/sys/linux"
 )
 
 var clockTicks = uint64(linux.GetClockTicks())

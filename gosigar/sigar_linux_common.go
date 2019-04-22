@@ -429,7 +429,7 @@ func readProcFile(pid int, name string) (content []byte, err error) {
 
 	// Panics have been reported when reading proc files, let's recover and
 	// report the path if this happens
-	// See https://github.com/ErwinYy/origin-elastic/beats/issues/6692
+	// See https://github.com/useproject/origin-elastic/beats/issues/6692
 	defer func() {
 		if r := recover(); r != nil {
 			content = nil

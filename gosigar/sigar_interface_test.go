@@ -9,7 +9,7 @@ import (
 	"testing"
 	"time"
 
-	. "github.com/ErwinYy/origin-elastic/gosigar"
+	. "github.com/useproject/origin-elastic/gosigar"
 	"github.com/stretchr/testify/assert"
 )
 

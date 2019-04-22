@@ -3,7 +3,7 @@ package fakes
 import (
 	"time"
 
-	sigar "github.com/ErwinYy/origin-elastic/gosigar"
+	sigar "github.com/useproject/origin-elastic/gosigar"
 )
 
 type FakeSigar struct {

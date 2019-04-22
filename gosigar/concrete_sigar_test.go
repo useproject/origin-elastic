@@ -5,7 +5,7 @@ import (
 	"testing"
 	"time"
 
-	sigar "github.com/ErwinYy/origin-elastic/gosigar"
+	sigar "github.com/useproject/origin-elastic/gosigar"
 	"github.com/stretchr/testify/assert"
 )
 

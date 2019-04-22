@@ -14,7 +14,7 @@ import (
 
 	log "github.com/Sirupsen/logrus"
 
-	"github.com/ErwinYy/origin-elastic/gosigar/sys/linux"
+	"github.com/useproject/origin-elastic/gosigar/sys/linux"
 )
 
 var (

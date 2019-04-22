@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/ErwinYy/origin-elastic/gosigar"
+	"github.com/useproject/origin-elastic/gosigar"
 )
 
 func format(val uint64) uint64 {

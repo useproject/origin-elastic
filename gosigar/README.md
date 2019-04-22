@@ -10,8 +10,8 @@ in pure go/cgo, rather than cgo bindings for libsigar.
 
 ## Test drive
 
-    $ go get github.com/ErwinYy/origin-elastic/gosigar
-    $ cd $GOPATH/src/github.com/ErwinYy/origin-elastic/gosigar/examples/ps
+    $ go get github.com/useproject/origin-elastic/gosigar
+    $ cd $GOPATH/src/github.com/useproject/origin-elastic/gosigar/examples/ps
     $ go build
     $ ./ps
 

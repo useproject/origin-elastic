@@ -13,7 +13,7 @@ import (
 	"syscall"
 	"unsafe"
 
-	"github.com/ErwinYy/origin-elastic/gosigar/sys"
+	"github.com/useproject/origin-elastic/gosigar/sys"
 	"github.com/pkg/errors"
 )
 

@@ -158,10 +158,7 @@ func newBaseMetricSets(r *Register, m Module) ([]BaseMetricSet, error) {
 	for _, name := range metricSetNames {
 		name = strings.ToLower(name)
 		for _, host := range hosts {
-			ids ,err := uuid.NewV4()
-			if err != nil {
-				continue
-			}
+			ids := uuid.NewV4()
 			id := ids.String()
 			metrics := monitoring.NewRegistry()
 			monitoring.NewString(metrics, "module").Set(m.Name())

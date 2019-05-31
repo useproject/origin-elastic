@@ -273,7 +273,7 @@ func (w *Watcher) handleEvent(data []byte) {
 		if err != nil {
 			return
 		}
-		pid := int(event.ProcessTgid)
+		pid := int(event.ProcessPid)
 
 		//fmt.Printf("******* PROC_EVENT_EXIT got event: %+v \n", event)
 

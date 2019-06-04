@@ -218,31 +218,43 @@ func (w *Watcher) handleEvent(data []byte) {
 		if err != nil {
 			return
 		}
-		ppid := int(event.ParentTgid)
+		//ppid := int(event.ParentTgid)
 		//pid := int(event.ChildTgid)
 		pid := int(event.ChildPid)
+
+
+		////*******************  TO DELETE  *******************
+		//debugVal := fmt.Sprintf("## %v ;; got FORK event: %+v \n\n", time.Now().Format("2006-01-02T15:04:05-0700"), event)
+		//writeTmpFile("forkDebug", debugVal)
+		////*******************  TO DELETE  *******************
 
 		//fmt.Printf("******* PROC_EVENT_FORK got event: %+v \n", event)
 
 		//if w.isWatching(ppid, PROC_EVENT_EXEC) {
-			// follow forks
-			//watch, _ := w.watches[ppid]
-			//w.Watch(pid, watch.flags)
+		// follow forks
+		//watch, _ := w.watches[ppid]
+		//w.Watch(pid, watch.flags)
 		//}
 
-		if w.isWatching(ppid, PROC_EVENT_FORK) {
-			//var proceventFork = AcquireProcEventFork()
-			//proceventFork.ParentPid = ppid
-			//proceventFork.ChildPid = pid
+		//if w.isWatching(ppid, PROC_EVENT_FORK) {
+		//var proceventFork = AcquireProcEventFork()
+		//proceventFork.ParentPid = ppid
+		//proceventFork.ChildPid = pid
 
-			//fmt.Printf("******* PROC_EVENT_FORK got proceventFork: %+v \n", proceventFork)
+		//fmt.Printf("******* PROC_EVENT_FORK got proceventFork: %+v \n", proceventFork)
 
-			select {
-			case w.Fork <- pid: //proceventFork.ChildPid:
-			default:
-			}
-			//ReleaseProcEventFork(proceventFork)
+		select {
+		case w.Fork <- pid: //proceventFork.ChildPid:
+		default:
 		}
+		//ReleaseProcEventFork(proceventFork)
+		//}
+
+		////*******************  TO DELETE  *******************
+		//debugVal = fmt.Sprintf("## %v ;;  FORK chan len: %v \n\n", time.Now().Format("2006-01-02T15:04:05-0700"), len(w.Fork))
+		//writeTmpFile("forkDebug", debugVal)
+		//*******************  TO DELETE  *******************
+
 		ReleaseForkProcEvent(event)
 	case PROC_EVENT_EXEC:
 		event := AcquireExecProcEvent()
@@ -250,22 +262,33 @@ func (w *Watcher) handleEvent(data []byte) {
 		if err != nil {
 			return
 		}
-		pid := int(event.ProcessTgid)
+		pid := int(event.ProcessPid)
+
+		////*******************  TO DELETE  *******************
+		//debugVal := fmt.Sprintf("## %v ;; got EXEC event: %+v \n\n", time.Now().Format("2006-01-02T15:04:05-0700"), event)
+		//writeTmpFile("execDebug", debugVal)
+		////*******************  TO DELETE  *******************
 
 		//fmt.Printf("******* PROC_EVENT_EXEC got event: %+v \n", event)
 
-		if w.isWatching(pid, PROC_EVENT_EXEC) {
-			//var proceventExec = AcquireProcEventExec()
-			//proceventExec.Pid = pid
+		//if w.isWatching(pid, PROC_EVENT_EXEC) {
+		//var proceventExec = AcquireProcEventExec()
+		//proceventExec.Pid = pid
 
-			//fmt.Printf("******* PROC_EVENT_EXEC got proceventExec: %+v \n", proceventExec)
+		//fmt.Printf("******* PROC_EVENT_EXEC got proceventExec: %+v \n", proceventExec)
 
-			select {
-			case w.Exec <- pid: //proceventExec.Pid:
-			default:
-			}
-			//ReleaseProcEventExec(proceventExec)
+		select {
+		case w.Exec <- pid: //proceventExec.Pid:
+		default:
 		}
+		//ReleaseProcEventExec(proceventExec)
+		//}
+
+		////*******************  TO DELETE  *******************
+		//debugVal = fmt.Sprintf("## %v ;;  EXEC chan len: %v \n\n", time.Now().Format("2006-01-02T15:04:05-0700"), len(w.Exec))
+		//writeTmpFile("execDebug", debugVal)
+		////*******************  TO DELETE  *******************
+
 		ReleaseExecProcEvent(event)
 	case PROC_EVENT_EXIT:
 		event := AcquireExitProcEvent()
@@ -273,29 +296,66 @@ func (w *Watcher) handleEvent(data []byte) {
 		if err != nil {
 			return
 		}
+
+		////*******************  TO DELETE  *******************
+		//debugVal := fmt.Sprintf("## %v ;; got EXIT event: %+v \n\n", time.Now().Format("2006-01-02T15:04:05-0700"), event)
+		//writeTmpFile("exitDebug", debugVal)
+		////*******************  TO DELETE  *******************
+
 		pid := int(event.ProcessPid)
 
 		//fmt.Printf("******* PROC_EVENT_EXIT got event: %+v \n", event)
 
-		if w.isWatching(pid, PROC_EVENT_EXIT) {
-			w.RemoveWatch(pid)
-			//var proceventExit = AcquireProcEventExit()
-			//proceventExit.Pid = pid
+		//if w.isWatching(pid, PROC_EVENT_EXIT) {
+		//w.RemoveWatch(pid)
+		//var proceventExit = AcquireProcEventExit()
+		//proceventExit.Pid = pid
 
-			//fmt.Printf("******* PROC_EVENT_EXIT got proceventExit: %+v \n", proceventExit)
+		//fmt.Printf("******* PROC_EVENT_EXIT got proceventExit: %+v \n", proceventExit)
 
-			select {
-			case w.Exit <- pid://proceventExit.Pid:
-			default:
-			}
-			//ReleaseProcEventExit(proceventExit)
+		select {
+		case w.Exit <- pid://proceventExit.Pid:
+		default:
 		}
+
+		////*******************  TO DELETE  *******************
+		//debugVal = fmt.Sprintf("## %v ;;  EXIT chan len: %v \n\n", time.Now().Format("2006-01-02T15:04:05-0700"), len(w.Exit))
+		//writeTmpFile("exitDebug", debugVal)
+		////*******************  TO DELETE  *******************
+
+		//ReleaseProcEventExit(proceventExit)
+		//}
 		ReleaseExitProcEvent(event)
 	}
 
 	//释放 pool
 	ReleaseCnMsgPool(msg)
 	ReleaseProcEvent(hdr)
+}
+
+
+func writeTmpFile(name string, value string) error {
+	info, err := os.Stat(name)
+	if err == nil {
+		if info.Size() >= 50*1024*1024 {
+			if err := os.Truncate(name, 0); err != nil {
+				//No process
+			}
+		}
+	}
+
+	fp, err := os.OpenFile(name, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0744)
+	if err != nil {
+		return err
+	}
+	defer fp.Close()
+
+	_, err = fp.Write([]byte(value))
+	if err != nil {
+		return err
+	}
+
+	return nil
 }
 
 // Bind our netlink socket and

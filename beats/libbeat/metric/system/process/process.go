@@ -103,6 +103,7 @@ func newProcess(pid int, cmdline string, env common.MapStr) (*Process, error) {
 func (proc *Process) getDetails(envPredicate func(string) bool) error {
 	proc.SampleTime = time.Now()
 
+	/*
 	proc.Mem = sigar.ProcMem{}
 	if err := proc.Mem.Get(proc.Pid); err != nil {
 		return fmt.Errorf("error getting process mem for pid=%d: %v", proc.Pid, err)
@@ -112,6 +113,7 @@ func (proc *Process) getDetails(envPredicate func(string) bool) error {
 	if err := proc.Cpu.Get(proc.Pid); err != nil {
 		return fmt.Errorf("error getting process cpu time for pid=%d: %v", proc.Pid, err)
 	}
+	 */
 
 	if proc.CmdLine == "" {
 		args := sigar.ProcArgs{}
@@ -127,13 +129,15 @@ func (proc *Process) getDetails(envPredicate func(string) bool) error {
 		proc.FD = *fd
 	}
 	*/
+
+	/*
 	if proc.Env == nil {
 		proc.Env = common.MapStr{}
 		if err := getProcEnv(proc.Pid, proc.Env, envPredicate); err != nil {
 			return fmt.Errorf("error getting process environment variables for pid=%d: %v", proc.Pid, err)
 		}
 	}
-
+	*/
 	return nil
 }
 
@@ -256,14 +260,14 @@ func (procStats *Stats) getProcessEvent(process *Process) common.MapStr {
 		"name":     process.Name,
 		"state":    process.State,
 		"username": process.Username,
-		"memory": common.MapStr{
-			"size": process.Mem.Size,
-			"rss": common.MapStr{
-				"bytes": process.Mem.Resident,
-				"pct":   GetProcMemPercentage(process, 0 /* read total mem usage */),
-			},
-			"share": process.Mem.Share,
-		},
+		//"memory": common.MapStr{
+		//	"size": process.Mem.Size,
+		//	"rss": common.MapStr{
+		//		"bytes": process.Mem.Resident,
+		//		"pct":   GetProcMemPercentage(process, 0 /* read total mem usage */),
+		//	},
+		//	"share": process.Mem.Share,
+		//},
 	}
 
 	if process.CmdLine != "" {
